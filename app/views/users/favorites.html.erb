@@ -1,0 +1,26 @@
+<% if @favorite_microposts.any? %>
+  <ul class="media-list">
+    <% @favorite_microposts.each do |favorite_micropost| %>
+      <li class="media">
+        <div class="media-left">
+          <img class="media-object img-rounded" src="<%= gravatar_url(favorite_micropost.user, options = { size: 50 }) %>" alt="">
+        </div>
+        <div class="media-body">
+          <div>
+            <%= link_to favorite_micropost.user.name, user_path(favorite_micropost.user) %> <span class="text-muted">posted at <%= favorite_micropost.created_at %></span>
+          </div>
+          <div>
+            <p><%= favorite_micropost.content %></p>
+          </div>
+          <div>
+            <% if current_user == favorite_micropost.user %>
+              <%= link_to "Delete", favorite_micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+            <% end %>
+              <%= render 'favorites/like_button', micropost: favorite_micropost %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate @favorite_microposts %>
+<% end %>

@@ -7,6 +7,8 @@
         </div>
         <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
       <% end %>
+      <br>
+      <%= link_to '自分のお気に入りをみる', favorites_user_path(current_user), class: 'btn btn-success btn-lg' %>
     </aside>
     <div class="col-xs-8">
       <%= render 'microposts/microposts', microposts: @microposts %>
